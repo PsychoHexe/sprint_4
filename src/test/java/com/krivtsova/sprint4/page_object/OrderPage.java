@@ -31,6 +31,7 @@ public class OrderPage {
     private final By next2_order_Button = By.xpath(".//div[contains(@class, 'Order_Buttons__1xGrp')]//button[text()='Заказать']");
 
     /// END====Локаторы кнопок
+
     // локатор для получения текста заголовка 1й страницы заказа
     private final By form_orderHeaderPage = By.className("Order_Header__BZXOb");
 
@@ -50,14 +51,12 @@ public class OrderPage {
 
     // локатор поля "Метро"
     private final By input_metro = By.className("select-search__input");
+
     // локатор контейнера станций
     private final By selectContainer_metro = By.xpath(".//div[starts-with(@class,'Order_Form')]//div[contains(@class, 'select-search ')]");
+
     // Локатор кнопки в контейнере станций
     private final By selectItems_metro = By.xpath(".//ul[contains(@class,'select-search__options')]");
-
-
-    // Список доступных станций
-    //private final By input_metroListItems = By.xpath(".//div[@class='select-search__select']//div[starts-with(@class,'Order_Text')]");
 
     // Локатор поля "Телефон"
     private final By input_phone = By.xpath(".//input[contains(@placeholder, '* Телефон: на него позвонит курьер')]");
@@ -71,8 +70,7 @@ public class OrderPage {
 
     // локатор поля "Когда привезти самокат"
     private final By input_dateCalendar = By.xpath(".//input[contains(@placeholder, '* Когда привезти самокат')]");
-    //private By dateSelected = By.className("react-datepicker__day--selected");
-
+    
     // локатор полей "Срок"
     private final By input_rentalPeriod = By.className("Dropdown-arrow");
     private final By input_rentalPeriod_Menu = By.className("Dropdown-menu");
@@ -87,13 +85,17 @@ public class OrderPage {
     /// END=====FORM_2
     
     /// BEG ====== Локаторы ошибок
+     
     private final By errorLocator = By.xpath(".//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')]");
+
     /// END ====== 
     
     /// BEG ====== Локаторы всплывающих окон
+    
     // Локатор окна "Хотите оформить заказ"
     private final By form_orderEnd = By.xpath(".//div[contains(@class, 'Order_ModalHeader__3FDaJ') and contains(text(), 'Хотите оформить заказ?')]");
-
+    
+    // Локатор кнопки да в окне подтверждения оформелния заказа
     private final By yesButton = By.xpath("//button[contains(@class, 'Button_Button__ra12g') and text()='Да' and not(contains(@class, 'Button_Inverted__3IF-i'))]");
 
     // Локатор окна подтверждения
@@ -101,11 +103,10 @@ public class OrderPage {
     
     // Локатор заголовка подтверждения оформления заказа во всплывающем окне
     private final By form_orderModalHeader = By.className("Order_ModalHeader__3FDaJ");
-
     
-    //Локатор 
     /// END ====== Локаторы всплывающих окон
 
+    // Метод проверки что одно из полей было введено не правильно
     public boolean checkingErrorInput(){
         List<WebElement> inputErrors = driver.findElements(errorLocator);
         for (WebElement elem : inputErrors) {
@@ -137,6 +138,7 @@ public class OrderPage {
     }
 
     /// BEG ===== Нажатие кнопок
+
     // метод для нажатия на кнопку "Далее"
     public void click_next_Button() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", driver.findElement(next_order_Button));
@@ -160,6 +162,7 @@ public class OrderPage {
     /// END ===== Нажатие кнопок
     
     /// BEG ===== Заполнение полей 1 части
+
     // Метод заполнения поля Имя
     public void setName(String nameText) {
         this.driver.findElement(input_name).sendKeys(nameText);
@@ -225,7 +228,6 @@ public class OrderPage {
         driver.findElement(input_rentalPeriod).click();
         driver.findElement(input_rentalPeriod_Menu).isEnabled();
         driver.findElement(By.xpath(String.format("//div[text()='%s']", rentalPeriod))).click();
-        //driver.findElement(By.linkText(rentalPeriod)).click();
     }
 
     // Метод заполнения поля "Цвет"
@@ -246,10 +248,12 @@ public class OrderPage {
 
     /// END ===== Заполнение полей 2 части
     
+    // Получить текст заголовка окна заказа
     public String getOrder_HeaderTxt (){
         return driver.findElement(form_orderHeaderPage).getText();
     }
 
+    //Получить заголовок всплывающего окна
     public String getOrderModal_HeaderTxt (){
         return driver.findElement(form_orderModalHeader).getText();
     }

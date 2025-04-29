@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class HomePage {
 
     private final WebDriver driver;
+
     // локатор faq
     private final By faqAccordion = By.className("accordion");
     private final By faqAccordionItemHeader = By.className("accordion__button");
@@ -66,17 +67,20 @@ public class HomePage {
         return driver.findElements(faqAccordionItemHeader).get(index).getText();
     }
 
-        // метод получения текста заголовка из порядкового номера faq
+    // метод получения текста заголовка из порядкового номера faq
     public String getFaqAccordionTxt(int index) {
         return driver.findElements(faqAccordionItemTxt).get(index).getText();
     }
 
-       // BEG ============== Дополнительно 
+    /// BEG ============== Дополнительно 
+
+    
     private final By logoYa = By.xpath(".//a[starts-with(@class,'Header_LogoYandex')]");
 
     // получение ссылки из лого Яндекс 
     public String getLinkLogoYa() {
         return driver.findElement(logoYa).getAttribute("href");
     }
-    // END =========== Дополнительно
+    
+    /// END =========== Дополнительно
 }

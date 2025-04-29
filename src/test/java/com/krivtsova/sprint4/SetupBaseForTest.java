@@ -20,7 +20,10 @@ public class SetupBaseForTest {
     private final String nameDriverType;
 
     public SetupBaseForTest() {
+        // Получаем из системных свойств название браузера для тестов
         String browser = System.getProperty("browser");
+
+        // Тестируемый браузер по умолчанию, если нет настроек в свойствах
         if(browser == null) browser = 
         "chrome"; 
         //"firefox"; 
