@@ -1,25 +1,20 @@
 package com.krivtsova.sprint4;
 
-import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ErrorCollector;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 
 import com.krivtsova.sprint4.page_object.HomePage;
 
 //тест для блока "Вопросы о главном"
 @RunWith(Parameterized.class)
-public class AccordionTest {
+public class AccordionTest extends SetupBaseForTest{
 
-    private WebDriver driver;
-
+    @Rule
+    public final ErrorCollector errorCollector = new ErrorCollector();
     //порядоковый номер accordion Item
     private final int elementNumber;
 
@@ -50,24 +45,6 @@ public class AccordionTest {
             {7, "Я живу за МКАДом, привезёте?", "Да, обязательно. Всем самокатов! И Москве, и Московской области."},};
     }
 
-    @Before
-    public void setupGoogle() {
-        // драйвер для браузера Chrome
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-        driver = new ChromeDriver(options);
-
-// url страницы
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
-
-    public void setupFirefox() {
-        FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
-        driver = new FirefoxDriver(options);
-        // переход на страницу тестового приложения
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-    }
 
     @Test
     public void testAccordion() {
@@ -76,14 +53,9 @@ public class AccordionTest {
 
         homePage.waitForLoadPage();
         homePage.clickFaq(elementNumber);
-
+        homePage.waitForOpenAccordion(elementNumber);
         assertEquals("Ошибка в заголовке FAQ " + elementNumber, headerTxt, homePage.getFaqAccordionTxtHeader(elementNumber));
         assertEquals("Ошибка в тексте FAQ " + elementNumber, itemTxt, homePage.getFaqAccordionTxt(elementNumber));
 
-    }
-
-    @After
-    public void driverQuit() {
-        driver.quit();
     }
 }

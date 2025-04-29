@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 // Класс страницы заказа
 public class OrderPage {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
     public OrderPage(WebDriver driver) {
         this.driver = driver;
@@ -22,32 +22,34 @@ public class OrderPage {
     /// BEG====Локаторы кнопок
     
     // локатор кнопки "Далее"
-    private By next_order_Button = By.xpath(".//div[starts-with(@class, 'Order_NextButton')]/button");
+    private final By next_order_Button = By.xpath(".//div[starts-with(@class, 'Order_NextButton')]/button");
 
     //Локатор кнопки назад во второй части формы
-    private By prev_Button = By.className("Button_Inverted__3IF-i");
+    private final By prev_Button = By.className("Button_Inverted__3IF-i");
 
     // локатор кнопки "Заказать" во второй форме
-    private By next2_order_Button = By.xpath(".//div[contains(@class, 'Order_Buttons__1xGrp')]//button[text()='Заказать']");
+    private final By next2_order_Button = By.xpath(".//div[contains(@class, 'Order_Buttons__1xGrp')]//button[text()='Заказать']");
 
     /// END====Локаторы кнопок
+    // локатор для получения текста заголовка 1й страницы заказа
+    private final By form_orderHeaderPage = By.className("Order_Header__BZXOb");
 
     /// BEG=====FORM_1 - Локаторы 1 части формы
 
     // локатор для кого самокат
-    private By form_orderHeaderPage1 = By.xpath("//div[@class='Order_Header__BZXOb' and text()='Для кого самокат']");
+    private final By form_orderHeaderPage1 = By.xpath("//div[@class='Order_Header__BZXOb' and text()='Для кого самокат']");
 
     // локатор поля "Имя"
-    private By input_name = By.xpath(".//input[contains(@placeholder, 'Имя')]");
+    private final By input_name = By.xpath(".//input[contains(@placeholder, 'Имя')]");
 
     // локатор поля "Фамилия"
-    private By input_family = By.xpath(".//input[contains(@placeholder, 'Фамилия')]");
+    private final By input_family = By.xpath(".//input[contains(@placeholder, 'Фамилия')]");
 
     // локатор поля "Адрес"
-    private By input_adress = By.xpath(".//input[contains(@placeholder, 'Адрес: куда привезти заказ')]");
+    private final By input_adress = By.xpath(".//input[contains(@placeholder, 'Адрес: куда привезти заказ')]");
 
     // локатор поля "Метро"
-    private By input_metro = By.className("select-search__input");
+    private final By input_metro = By.className("select-search__input");
     // локатор контейнера станций
     private final By selectContainer_metro = By.xpath(".//div[starts-with(@class,'Order_Form')]//div[contains(@class, 'select-search ')]");
     // Локатор кнопки в контейнере станций
@@ -58,47 +60,49 @@ public class OrderPage {
     //private final By input_metroListItems = By.xpath(".//div[@class='select-search__select']//div[starts-with(@class,'Order_Text')]");
 
     // Локатор поля "Телефон"
-    private By input_phone = By.xpath(".//input[contains(@placeholder, '* Телефон: на него позвонит курьер')]");
+    private final By input_phone = By.xpath(".//input[contains(@placeholder, '* Телефон: на него позвонит курьер')]");
 
     /// END=====FORM_1
     
     /// BEG=====FORM_2 - Локаторы 2 части формы
     
     // локатор про аренду
-    private By form_orderHeaderPage2 = By.xpath("//div[@class='Order_Header__BZXOb' and text()='Про аренду']");
+    private final By form_orderHeaderPage2 = By.xpath("//div[@class='Order_Header__BZXOb' and text()='Про аренду']");
 
     // локатор поля "Когда привезти самокат"
-    private By input_dateCalendar = By.xpath(".//input[contains(@placeholder, '* Когда привезти самокат')]");
+    private final By input_dateCalendar = By.xpath(".//input[contains(@placeholder, '* Когда привезти самокат')]");
     //private By dateSelected = By.className("react-datepicker__day--selected");
 
     // локатор полей "Срок"
-    private By input_rentalPeriod = By.className("Dropdown-arrow");
-    private By input_rentalPeriod_Menu = By.className("Dropdown-menu");
+    private final By input_rentalPeriod = By.className("Dropdown-arrow");
+    private final By input_rentalPeriod_Menu = By.className("Dropdown-menu");
 
     // локатор поля "Цвет"
-    private By input_colorBlack = By.id("black");
-    private By input_colorGrey = By.id("grey");
+    private final By input_colorBlack = By.id("black");
+    private final By input_colorGrey = By.id("grey");
 
     // локатор поля "Коммент"
-    private By input_comment = By.xpath(".//input[contains(@placeholder, 'Комментарий для курьера')]");
+    private final By input_comment = By.xpath(".//input[contains(@placeholder, 'Комментарий для курьера')]");
 
     /// END=====FORM_2
     
     /// BEG ====== Локаторы ошибок
-    private By errorLocator = By.xpath(".//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')]");
+    private final By errorLocator = By.xpath(".//div[contains(@class, 'Input_ErrorMessage__3HvIb') and contains(@class, 'Input_Visible___syz6')]");
     /// END ====== 
     
     /// BEG ====== Локаторы всплывающих окон
     // Локатор окна "Хотите оформить заказ"
-    private By form_orderEnd = By.xpath(".//div[contains(@class, 'Order_ModalHeader__3FDaJ') and contains(text(), 'Хотите оформить заказ?')]");
+    private final By form_orderEnd = By.xpath(".//div[contains(@class, 'Order_ModalHeader__3FDaJ') and contains(text(), 'Хотите оформить заказ?')]");
 
-    private By yesButton = By.xpath("//button[contains(@class, 'Button_Button__ra12g') and text()='Да' and not(contains(@class, 'Button_Inverted__3IF-i'))]");
+    private final By yesButton = By.xpath("//button[contains(@class, 'Button_Button__ra12g') and text()='Да' and not(contains(@class, 'Button_Inverted__3IF-i'))]");
 
     // Локатор окна подтверждения
-    private By form_success = By.xpath(".//div[contains(@class, 'Order_ModalHeader__3FDaJ') and contains(text(), 'Заказ оформлен')]");
+    private final By form_success = By.xpath(".//div[contains(@class, 'Order_ModalHeader__3FDaJ') and contains(text(), 'Заказ оформлен')]");
+    
+    // Локатор заголовка подтверждения оформления заказа во всплывающем окне
+    private final By form_orderModalHeader = By.className("Order_ModalHeader__3FDaJ");
 
-    //private By viewStatusButton = By.xpath("//button[contains(@class, 'Order_NextButton__1_rCA')]//button[text()='Посмотреть статус']");
-
+    
     //Локатор 
     /// END ====== Локаторы всплывающих окон
 
@@ -117,19 +121,19 @@ public class OrderPage {
 
     // метод ожидания продгрузки страницы
     public void waitForLoadPage_part2() {
-        new WebDriverWait(driver, Duration.ofSeconds(3));
+        // new WebDriverWait(driver, Duration.ofSeconds(3));
         checkingErrorInput();
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOf(driver.findElement(form_orderHeaderPage2)));
     }
 
     // метод ожидания продгрузки страницы подтверждения
     public void waitForLoadPage_End() {
-        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.visibilityOf(driver.findElement(form_orderEnd)));
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.visibilityOfElementLocated(form_orderEnd));
     }
 
     // метод ожидания продгрузки страницы подтверждения
     public void waitForLoadPage_success() {
-        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.visibilityOf(driver.findElement(form_success)));
+        new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.visibilityOfElementLocated(form_success));
     }
 
     /// BEG ===== Нажатие кнопок
@@ -242,6 +246,13 @@ public class OrderPage {
 
     /// END ===== Заполнение полей 2 части
     
+    public String getOrder_HeaderTxt (){
+        return driver.findElement(form_orderHeaderPage).getText();
+    }
+
+    public String getOrderModal_HeaderTxt (){
+        return driver.findElement(form_orderModalHeader).getText();
+    }
     
     //Метод подтверждения заказа
     public void setEndYes() {
