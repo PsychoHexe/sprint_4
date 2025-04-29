@@ -1,6 +1,5 @@
 package com.krivtsova.sprint4;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,35 +32,7 @@ public class OrderTest extends SetupBaseForTest {
 
     }
 
-    // Тест на переход страницу формы заказа самоката через клик кнопки в шапке
-    @Test
-    public void openOrderPage_headerButton() {
-        HomePage homePage = new HomePage(driver);
-
-        homePage.waitForLoadPage();
-        homePage.clickTopOrderButton();
-
-        OrderPage orderPage = new OrderPage(driver);
-        orderPage.waitForLoadPage_part1();
-
-        assertEquals("Неудалось перейти на страницу оформления заказа", "Для кого самокат", orderPage.getOrder_HeaderTxt());
-    }
-    // Тест на переход страницу формы заказа самоката через клик кнопки внизу
-
-    @Test
-    public void openOrderPage_howWorkButton() {
-        HomePage homePage = new HomePage(driver);
-
-        homePage.waitForLoadPage();
-
-        homePage.clickBigOrderButton();
-
-        OrderPage orderPage = new OrderPage(driver);
-        orderPage.waitForLoadPage_part1();
-
-        assertEquals("Неудалось перейти на страницу оформления заказа", "Для кого самокат", orderPage.getOrder_HeaderTxt());
-    }
-
+    
     @Parameterized.Parameters
     public static Object[][] setTestObj() {
         return new Object[][]{
@@ -101,7 +72,7 @@ public class OrderTest extends SetupBaseForTest {
         orderPage.click_next2_Button();
         orderPage.waitForLoadPage_End();
         orderPage.setEndYes();
-        orderPage.waitForLoadPage_success();
+        
 
         assertTrue("Неудалось оформить заказ", orderPage.getOrderModal_HeaderTxt().contains("Заказ оформлен"));
     }

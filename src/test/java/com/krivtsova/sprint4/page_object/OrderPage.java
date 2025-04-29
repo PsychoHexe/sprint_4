@@ -13,6 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 // Класс страницы заказа
 public class OrderPage {
 
+    private final String pattern_metro_button = ".//button[./div[@class='Order_Text__2broi' and text()='%s']]";
+
     private final WebDriver driver;
 
     public OrderPage(WebDriver driver) {
@@ -196,7 +198,7 @@ public class OrderPage {
         new WebDriverWait(driver, Duration.ofSeconds(2)).until(ExpectedConditions.attributeContains(selectContainer_metro, "class", "has-focus"));
         driver.findElement(input_metro).sendKeys(stationName);
         WebElement metro_option = driver.findElement(selectItems_metro);
-        WebElement selectButton = metro_option.findElement(By.xpath(String.format(".//button[./div[@class='Order_Text__2broi' and text()='%s']]", stationName)));
+        WebElement selectButton = metro_option.findElement(By.xpath(String.format(pattern_metro_button, stationName)));
         //scrollToChildElement(driver.findElement(input_metroListItems), selectButton);
         selectButton.click();
         }
